@@ -11,10 +11,15 @@
         <link rel="stylesheet" href="../css/app.css">
 
     </head>
-    <body>
-        
 
-    
-    </body>
+<body>
+
+ <?php
+ 
+ 
+ require("/home/utilisateur/Quizz_simplon_app/resources/views/quiz.php");
+
+?>
+</body>
    
 </html>
