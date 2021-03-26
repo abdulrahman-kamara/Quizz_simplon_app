@@ -1,3 +1,6 @@
+@extends('base')
+
+@include('components.header')
 <main>
 
     <img src="{{ asset('img/logoFoot.png') }}" alt="logo-simplon" id="logo-simplon">
@@ -20,3 +23,5 @@
     </div>
     
 </main>
+
+@include('components.footer')
