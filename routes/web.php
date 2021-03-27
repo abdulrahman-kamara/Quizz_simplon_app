@@ -31,13 +31,14 @@ Route::get('/dashboard', function () {
 });
 
 
-// Route::get('/crudQuizz', function () {
-//     return view('crudQuizz');
-// });
-
 Route::get('crudQuizz', [CrudQuizzController::class,"readQuizz" ]) ;
 
-Route::post('/fill-quizz', [CrudQuizzController::class,"createQuizz" ]) ;
+Route::post('fill-quizz', [CrudQuizzController::class,"createQuizz" ]) ;
+
+Route::post('modify_quizz', [CrudQuizzController::class,"updateQuizz" ]) ;
+
+Route::post('remove_quizz_id', [CrudQuizzController::class,"deleteQuizz" ]) ;
+
 
 
 

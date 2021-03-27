@@ -27,30 +27,51 @@ class CrudQuizzController extends Controller{
        $wrongAnswer = $validatedDataWrong["wrong_asw"];
        DB::insert("INSERT INTO wrong_answer (content_wrong_answer)  VALUES (:content_wrong_answer)", ["content_wrong_answer" => $wrongAnswer]); 
 
-      return view('crudQuizz');
+      return redirect('crudQuizz');
     }
 
 
     public function readQuizz(){
-
-
-   //voir pour une syntaxe plutot sous forme objet
   
    $questionsToShow = DB::select("SELECT id, content_question FROM questions");
-   $rightAnswersToShow = DB::select("SELECT content_right_answer FROM right_answer LEFT JOIN questions ON right_answer.id = questions.right_answer_id");
-   $wrongAnswersToShow = DB::select("SELECT content_wrong_answer FROM wrong_answer LEFT JOIN questions ON wrong_answer.id = questions.wrong_answer_id");
-   return view('crudQuizz', ["questionsToShow" => $questionsToShow, "rightAnswersToShow"=> $rightAnswersToShow, "wrongAnswersToShow"=>$wrongAnswersToShow]);
-  // return view('crudQuizz', ["questionsToShow"=>$questionsToShow]);
-  // var_dump($questionsToShow);
+   $rightAnswersToShow = DB::select("SELECT questions.id, content_right_answer FROM right_answer LEFT JOIN questions ON right_answer.id = questions.right_answer_id");
+   $wrongAnswersToShow = DB::select("SELECT questions.id, content_wrong_answer FROM wrong_answer LEFT JOIN questions ON wrong_answer.id = questions.wrong_answer_id");
+   return view('crudQuizz', ["questionsToShow" =>  $questionsToShow , "rightAnswersToShow"=> $rightAnswersToShow, "wrongAnswersToShow"=>$wrongAnswersToShow]);
+
     }
 
-//     public function updateQuizz(Request $request){  
-   
-//     }
+    public function updateQuizz(Request $request){  
 
-//     //méthode POST avec input caché
-//     public function deleteQuizz(Request $request){
-//   }
+      $validatedData = $request->validate(["modify_question_content" => "required"]);
+      $modif = $validatedData['modify_question_content'];
+      $toModify = $request -> input('to_modify');
+      DB::update("UPDATE questions SET content_question = :content_question WHERE id = :id", ["content_question"=> $modif, "id"=> $toModify]);
+
+
+      $validatedData = $request->validate(["modify_right_answer_content" => "required"]);
+      $modif = $validatedData['modify_right_answer_content'];
+      $toModify = $request -> input('to_modify');
+      DB::update("UPDATE right_answer SET content_right_answer = :content_right_answer WHERE id = :id", ["content_right_answer"=> $modif, "id"=> $toModify]);
+
+      $validatedData = $request->validate(["modify_wrong_answer_content" => "required"]);
+      $modif = $validatedData['modify_wrong_answer_content'];
+      $toModify = $request -> input('to_modify');
+      DB::update("UPDATE wrong_answer SET content_wrong_answer = :content_wrong_answer WHERE id = :id", ["content_wrong_answer"=> $modif, "id"=> $toModify]);
+
+
+      return redirect('crudQuizz');
+
+    }
+
+    public function deleteQuizz(Request $request){
+      $toDelete = $request->input('remove_quizz_index');
+      DB::delete("DELETE FROM questions WHERE id = :id",["id"=> $toDelete]);
+      DB::delete("DELETE FROM right_answer WHERE id = :id",["id"=> $toDelete]);
+      DB::delete("DELETE FROM wrong_answer WHERE id = :id",["id"=> $toDelete]);
+
+      return redirect('crudQuizz');
+
+  }
      
 }
 
