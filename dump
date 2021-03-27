@@ -1,0 +1,22 @@
+<!-- <div id="container-show-quizz">
+     <form method="get" action="/show-quizz">
+     @csrf
+     <ul>
+            @foreach ($questionsToShow ?? '' as $questionToShow)
+                <li>{{$questionToShow -> content_question}}
+                </li>
+            @endforeach 
+            @foreach ($rightAnswersToShow ?? ''  as $rightAnswerToShow )
+                <li>{{$rightAnswerToShow -> content_right_answer}}
+                </li>
+            @endforeach     
+            @foreach ($wrongAnswersToShow  ?? ''  as $$wrongAnswerToShow )
+                <li>{{$wrongAnswerToShow -> content_wrong_answer}}
+                </li>
+            @endforeach    
+               </ul>
+</form> -->
+<!-- <input type="checkbox" name="show-question" class="input-answer" /> <label for="question">{{$questionToShow ?? ''}}</label>
+<input type="checkbox" name="show-right-answer" class="input-answer" /> <label for="right-answer">{{$rightAnswerToShow ?? ''}}</label>
+<input type="checkbox" name="show-wrong-answer" class="input-answer" /> <label for="wrong-answer">{{$wrongAnswerToShow?? ''}}</label> -->
+

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CrudQuizzController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,18 @@ Route::get('/signup', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
+
+// Route::get('/crudQuizz', function () {
+//     return view('crudQuizz');
+// });
+
+Route::get('crudQuizz', [CrudQuizzController::class,"readQuizz" ]) ;
+
+Route::post('/fill-quizz', [CrudQuizzController::class,"createQuizz" ]) ;
+
+
+
+
+
+
